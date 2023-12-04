@@ -5,6 +5,9 @@ import model.Transaction;
 import java.sql.*;
 
 public class TransactionRepository {
+    private static final String UPDATE_TRANSACTION_SQL =
+            "UPDATE transaction SET category = ?, label = ?, date = ?, payment_id = ? WHERE id = ?";
+
     private final Connection connection;
 
     private static final String INSERT_TRANSACTION_SQL =
@@ -69,5 +72,20 @@ public class TransactionRepository {
 
         return transaction;
     }
+
+    public void updateTransaction(Transaction transaction) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TRANSACTION_SQL)) {
+            preparedStatement.setString(1, transaction.getCategory());
+            preparedStatement.setString(2, transaction.getLabel());
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(transaction.getDate().atStartOfDay()));
+            preparedStatement.setString(4, transaction.getPaymentId());
+            preparedStatement.setString(5, transaction.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

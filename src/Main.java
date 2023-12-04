@@ -84,7 +84,7 @@ public class Main {
             //InsertCurrency
             CurrencyRepository currencyRepository = new CurrencyRepository(connection);
             Currency newCurrency = new Currency();
-            newCurrency.setId("LOL");
+            newCurrency.setId("LMO");
             newCurrency.setCurrencyCode("£");
             newCurrency.setCurrencyName("German");
             newCurrency.setCurrencySymbol("µ");
@@ -116,7 +116,7 @@ public class Main {
 
             // Update Currency
             Currency updatedCurrency = new Currency();
-            updatedCurrency.setId("JII");
+            updatedCurrency.setId("MIU");
             updatedCurrency.setCurrencyCode("££");
             updatedCurrency.setCurrencyName("Updated Currency Name");
             updatedCurrency.setCurrencySymbol("µµ");
@@ -141,7 +141,7 @@ public class Main {
 
             //Insert Transactions
             Transaction newTransaction = new Transaction();
-            newTransaction.setId("155");
+            newTransaction.setId("160");
             newTransaction.setCategory("expense");
             newTransaction.setLabel("None");
             newTransaction.setDate(LocalDate.parse("2023-12-04").atStartOfDay());
@@ -151,7 +151,7 @@ public class Main {
 
 
            // Delete Transactions
-            String transactionIdToDelete = "150";
+            String transactionIdToDelete = "155";
             boolean isTransactionDeleted = transactionRepository.deleteTransactionById(transactionIdToDelete);
 
             if (isTransactionDeleted) {
@@ -159,6 +159,16 @@ public class Main {
             } else {
                 System.out.println("No transaction found with the ID " + transactionIdToDelete);
             }
+
+            // Update Transaction
+            Transaction transactionToUpdate = new Transaction();
+            transactionToUpdate.setId("101");
+            transactionToUpdate.setCategory("income");
+            transactionToUpdate.setLabel("Salary");
+            transactionToUpdate.setDate(LocalDateTime.parse("2023-12-05T12:30:00"));
+            transactionToUpdate.setPaymentId("3");
+            transactionRepository.updateTransaction(transactionToUpdate);
+            System.out.println("Transaction updated successfully.");
 
             //Get Transactions
             String transactionIdToRetrieve = "101";
