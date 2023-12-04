@@ -57,7 +57,7 @@ public class Main {
                 //InsertCurrency
             CurrencyRepository currencyRepository = new CurrencyRepository(connection);
             Currency newCurrency = new Currency();
-            newCurrency.setId("KYB");
+            newCurrency.setId("KJI");
             newCurrency.setCurrencyCode("£");
             newCurrency.setCurrencyName("German");
             newCurrency.setCurrencySymbol("µ");
@@ -89,7 +89,7 @@ public class Main {
 
             //Insert Transactions
             Transaction newTransaction = new Transaction();
-            newTransaction.setId("120");
+            newTransaction.setId("133");
             newTransaction.setCategory("expense");
             newTransaction.setLabel("None");
             newTransaction.setDate(LocalDate.parse("2023-12-04").atStartOfDay());
@@ -99,7 +99,7 @@ public class Main {
 
 
            // Delete Transactions
-            String transactionIdToDelete = "110";
+            String transactionIdToDelete = "130";
             boolean isTransactionDeleted = transactionRepository.deleteTransactionById(transactionIdToDelete);
 
             if (isTransactionDeleted) {
@@ -109,6 +109,19 @@ public class Main {
             }
 
             //Get Transactions
+            String transactionIdToRetrieve = "109";
+            Transaction retrievedTransaction = transactionRepository.getTransactionById(transactionIdToRetrieve);
+
+            if (retrievedTransaction != null) {
+                System.out.println("Transaction details");
+                System.out.println("ID: " + retrievedTransaction.getId());
+                System.out.println("Category: " + retrievedTransaction.getCategory());
+                System.out.println("Label: " + retrievedTransaction.getLabel());
+                System.out.println("Date: " + retrievedTransaction.getDate());
+                System.out.println("Payment ID: " + retrievedTransaction.getPaymentId());
+            } else {
+                System.out.println("No transaction found with the ID " + transactionIdToRetrieve);
+            }
 
 
         } finally {

@@ -47,7 +47,7 @@ public class TransactionRepository {
     }
 
     public Transaction getTransactionById(String transactionId) {
-        String sql = "SELECT * FROM transactions WHERE id = ?";
+        String sql = "SELECT * FROM transaction WHERE id = ?";
         Transaction transaction = null;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
