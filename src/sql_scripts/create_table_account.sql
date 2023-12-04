@@ -16,3 +16,9 @@ CREATE TABLE IF NOT EXISTS "account"(
     currency_id VARCHAR(100) REFERENCES "currency"(id),
     transaction_id VARCHAR(100) REFERENCES "transaction"(id)
 );
+
+INSERT INTO "account" (id, account_name, account_type, balance, currency_id, transaction_id)
+VALUES
+    ('A1', 'Main Account', 'general', 5000.00, 'USD', '101'),
+    ('A2', 'Savings Account', 'savings', 10000.00, 'EUR', '102'),
+    ('A3', 'Credit Card', 'credit card', -500.00, 'USD', '103');

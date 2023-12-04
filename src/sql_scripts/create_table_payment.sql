@@ -9,3 +9,9 @@ CREATE TABLE IF NOT EXISTS "payment"(
                                        payment_status ILIKE 'cancelled' OR
                                        payment_status ILIKE 'validated')
     );
+
+    INSERT INTO "payment" (id, payment_mode, payment_status)
+    VALUES
+        ('1', 'cash', 'bank reconciliation done'),
+        ('2', 'debit card', 'validated'),
+        ('3', 'transfer', 'cancelled');
