@@ -38,11 +38,26 @@ public class Main {
             accountRepository.addAccount(newAccount);
             System.out.println("Account created successfully.");
 
+            //GetAccount
+            String accountIdToRetrieve = "123456";
+            Account retrievedAccount = accountRepository.getAccountById(accountIdToRetrieve);
+
+            if (retrievedAccount != null) {
+                System.out.println("Account details");
+                System.out.println("ID: " + retrievedAccount.getId());
+                System.out.println("Account Name: " + retrievedAccount.getAccountName());
+                System.out.println("Account Type: " + retrievedAccount.getAccountType());
+                System.out.println("Balance: " + retrievedAccount.getBalance());
+                System.out.println("Currency ID: " + retrievedAccount.getCurrencyId());
+                System.out.println("Transaction ID: " + retrievedAccount.getTransactionId());
+            } else {
+                System.out.println("No account found with the ID " + accountIdToRetrieve);
+            }
 
                 //InsertCurrency
             CurrencyRepository currencyRepository = new CurrencyRepository(connection);
             Currency newCurrency = new Currency();
-            newCurrency.setId("QIO");
+            newCurrency.setId("KYB");
             newCurrency.setCurrencyCode("£");
             newCurrency.setCurrencyName("German");
             newCurrency.setCurrencySymbol("µ");
@@ -74,7 +89,7 @@ public class Main {
 
             //Insert Transactions
             Transaction newTransaction = new Transaction();
-            newTransaction.setId("105");
+            newTransaction.setId("120");
             newTransaction.setCategory("expense");
             newTransaction.setLabel("None");
             newTransaction.setDate(LocalDate.parse("2023-12-04").atStartOfDay());
@@ -84,7 +99,7 @@ public class Main {
 
 
            // Delete Transactions
-            String transactionIdToDelete = "103";
+            String transactionIdToDelete = "110";
             boolean isTransactionDeleted = transactionRepository.deleteTransactionById(transactionIdToDelete);
 
             if (isTransactionDeleted) {
@@ -92,6 +107,9 @@ public class Main {
             } else {
                 System.out.println("No transaction found with the ID " + transactionIdToDelete);
             }
+
+            //Get Transactions
+
 
         } finally {
             try {
