@@ -185,7 +185,13 @@ components:
             - credit card 
             - transfert 
             - voucher 
-            - mobile payment 
+            - mobile payment
+        status:
+          type: string
+          enum:
+            - bank reconciliation done
+            - cancelled
+            - not validated
     UpdateAccountTransaction: 
       type: object
       properties:
