@@ -46,5 +46,28 @@ public class TransactionRepository {
         }
     }
 
+    public Transaction getTransactionById(String transactionId) {
+        String sql = "SELECT * FROM transactions WHERE id = ?";
+        Transaction transaction = null;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, transactionId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    transaction = new Transaction();
+                    transaction.setId(resultSet.getString("id"));
+                    transaction.setCategory(resultSet.getString("category"));
+                    transaction.setLabel(resultSet.getString("label"));
+                    transaction.setDate(resultSet.getTimestamp("date").toLocalDateTime());
+                    transaction.setPaymentId(resultSet.getString("payment_id"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return transaction;
+    }
 
 }
