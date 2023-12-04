@@ -5,6 +5,7 @@ import model.Transaction;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class TransactionRepository {
     private final Connection connection;
@@ -26,8 +27,9 @@ public class TransactionRepository {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TRANSACTION_SQL)) {
             preparedStatement.setString(1, transaction.getId());
             preparedStatement.setString(2, transaction.getCategory());
-            preparedStatement.setDate(3, java.sql.Date.valueOf(transaction.getDate()));
-            preparedStatement.setString(4, transaction.getPaymentId());
+            preparedStatement.setString(3,transaction.getLabel());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(transaction.getDate().atStartOfDay()));
+            preparedStatement.setString(5, transaction.getPaymentId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

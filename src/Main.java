@@ -1,13 +1,17 @@
 import model.Account;
 import model.Currency;
+import model.Transaction;
 import repository.AccountRepository;
 import repository.ConnectionConfiguration;
 import repository.CurrencyRepository;
+import repository.TransactionRepository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static repository.AccountRepository.INSERT_ACCOUNT_SQL;
 
@@ -65,6 +69,18 @@ public class Main {
             String currencyIdToDelete = "LMS";
             currencyRepository.deleteCurrencyById(currencyIdToDelete);
             System.out.println("Currency with ID " + currencyIdToDelete + " deleted successfully");
+
+            TransactionRepository transactionRepository = new TransactionRepository(connection);
+
+            //Insert Transactions
+            Transaction newTransaction = new Transaction();
+            newTransaction.setId("109");
+            newTransaction.setCategory("expense");
+            newTransaction.setLabel("None");
+            newTransaction.setDate(LocalDate.parse("2023-12-04").atStartOfDay());
+            newTransaction.setPaymentId("2");
+            transactionRepository.addTransaction(newTransaction);
+            System.out.println("Transaction added successfully.");
 
 
         } finally {

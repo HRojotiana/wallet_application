@@ -1,20 +1,28 @@
 package model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Transaction {
     private String id;
     private String category;
+    private String label;
     private LocalDateTime date;
     private String paymentId;
 
     //Constructor
-    public Transaction(String id, String category, LocalDateTime date, String paymentId) {
+
+    public Transaction(String id, String category, String label, LocalDateTime date, String paymentId) {
         this.id = id;
         this.category = category;
+        this.label = label;
         this.date = date;
         this.paymentId = paymentId;
+    }
+
+    public Transaction() {
+
     }
 
     //Getter
@@ -26,8 +34,12 @@ public class Transaction {
         return category;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDate getDate() {
+        return LocalDate.from(date);
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public String getPaymentId() {
@@ -51,6 +63,10 @@ public class Transaction {
         this.paymentId = paymentId;
     }
 
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     //Equals and hashCode
 
     @Override
@@ -62,7 +78,7 @@ public class Transaction {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCategory(), getDate(), getPaymentId());
+        return Objects.hash(getId(), getCategory(), getLabel(),getDate(), getPaymentId());
     }
 
     //ToString
@@ -72,6 +88,7 @@ public class Transaction {
         return "Transaction:" +
                 "id='" + id + '\'' +
                 ", category='" + category + '\'' +
+                ", label ='" + label + '\'' +
                 ", date=" + date +
                 ", paymentId='" + paymentId;
     }
