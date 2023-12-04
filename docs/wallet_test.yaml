@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: Wallet api
+  version: 1.0.0
+  description: This is a test for the wallet budget buckers application's functionnalities
+tags:
+  - name: Account
+    description: Everything about accounts
+paths:
+  /accounts: 
+    get: 
+      tags:
+        - Account
+      summary: Show all users sorted A to Z, by balance upward or downward
+      parameters:
+        - name: "balance" 
+          in: query
+          description: for sorting by balance
+          required: false
+          schema: 
+            type: number
+      responses:
+        200: 
+          $ref: '#/components/responses/account200' 
+        400: 
+          $ref: '#/components/responses/400'
+        403: 
+          $ref: '#/components/responses/403'
+        500: 
+          $ref: '#/components/responses/500'
+  /account/{accountId}: 
+    put: 
+      tags:
+        - Account
+      summary: Update account by its id 
+      parameters:
+        - $ref: '#/components/parameters/AccountId' 
+      responses:
+        200: 
+          $ref: '#/components/responses/account200'
+        400: 
+          $ref: '#/components/responses/400'
+        403: 
+          $ref: '#/components/responses/403'
+        500: 
+          $ref: '#/components/responses/500'
+  /account/{accountId}/transaction/{transactionId}:
+    put: 
+      tags:
+        - Account 
+      parameters:
+        - name: accountId 
+          in: path 
+          required: true
+          schema: 
+            type: string
+      responses:
+        200: 
+          $ref: '#/components/responses/account200'
+        400: 
+          $ref: '#/components/responses/400'
+        403: 
+          $ref: '#/components/responses/403'
+        500: 
+          $ref: '#/components/responses/500'
+  /account/transactions: 
+    put: 
+      tags:
+        - Account 
+      operationId: updateAccountTransaction 
+      requestBody: 
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/UpdateAccountTransaction'
+      responses:
+        200: 
+          $ref: '#/components/responses/account200'
+        400: 
+          $ref: '#/components/responses/400'
+        403: 
+          $ref: '#/components/responses/403'
+        500: 
+          $ref: '#/components/responses/500'
+  /account/{accountId}/currency/{currencyId}: 
+    put: 
+      tags:
+        - Account 
+      summary: update an account with its currency 
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        200: 
+          $ref: '#/components/responses/account200'
+        400: 
+          $ref: '#/components/responses/400'
+        403: 
+          $ref: '#/components/responses/403'
+        500: 
+          $ref: '#/components/responses/500'
+  /account/currency: 
+    put: 
+      tags:
+        - Account 
+      summary: update an account with its currency 
+      operationId: updateAccountCurrency 
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/UpdateAccountCurrency'
+      responses:
+        200: 
+          $ref: '#/components/responses/account200'
+        400: 
+          $ref: '#/components/responses/400'
+        403: 
+          $ref: '#/components/responses/403'
+        500: 
+          $ref: '#/components/responses/500'
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id: 
+          type: string
+        accountName:
+          type: string
+        accountType:
+          type: string
+          enum:
+            - general
+            - cash
+            - my account 
+            - credit card
+            - overdraft account 
+            - savings account 
+            - bonus 
+            - insurance 
+            - investment 
+            - loan 
+            - mortgage
+        balance: 
+          type: number
+        currency: 
+          $ref: "#/components/schemas/Currency"
+        transactions: 
+          type: array
+          items: 
+            $ref: "#/components/schemas/Transaction"
+    Transaction: 
+      type: object
+      properties:
+        id: 
+          type: string
+        category: 
+          type: string
+        label: 
+          type: string
+        date:
+          type: string
+          format: date-time
+        payment: 
+          $ref: "#/components/schemas/Payment"
+    Currency: 
+      type: object
+      properties:
+        currencyCode: 
+          type: string
+        currencyName: 
+          type: string
+        currencySymbol: 
+          type: string 
+        exchangeRate: 
+          type: string 
+    Payment: 
+      type: object
+      properties:
+        paymentMode: 
+          type: string
+          enum:
+            - cash
+            - debit card 
+            - credit card 
+            - transfert 
+            - voucher 
+            - mobile payment 
+    UpdateAccountTransaction: 
+      type: object
+      properties:
+        accountId: 
+          type: string 
+        transactionId: 
+          type: string 
+      required:
+        - accountId
+        - transactionId
+    UpdateAccountCurrency:
+      type: object
+      properties:
+        accountId: 
+          type: string 
+        currencyId: 
+          type: string 
+      required:
+        - accountId
+        - currencyId
+  parameters:
+    AccountId: 
+      name: accountId 
+      in: path 
+      required: true
+      schema: 
+        type: string
+  responses:
+    'account200':  
+      description: successful operation 
+      content:
+        application/json:
+          schema: 
+            $ref: "#/components/schemas/Account"
+    '400': 
+      description: Bad request 
+    '403': 
+      description: Forbidden
+    '500': 
+      description: Internal server error
+        
+        
+        
