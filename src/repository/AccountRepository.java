@@ -12,9 +12,9 @@ public class AccountRepository {
     private static final String SELECT_ACCOUNT_BY_ID_SQL = "SELECT * FROM account WHERE id = ?";
     private static final String UPDATE_ACCOUNT_SQL = "UPDATE account SET account_name = ?, account_type = ?, balance = ?, currency_id = ?, transaction_id = ? WHERE id = ?";
 
-    private Connection connection;
+    final Connection connection;
 
-    private AccountRepository(Connection connection){
+    public AccountRepository(Connection connection){
         this.connection = connection;
     }
     public void addAccount(Account account){

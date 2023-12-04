@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Account {
     private String id;
     private String accountName;
