@@ -10,9 +10,9 @@ public class ConnectionConfiguration {
 
     private ConnectionConfiguration() {
         try {
-            String url = "jdbc:postgresql://localhost:5432/wallet_app";
-            String username = "prog_admin";
-            String password = "123456";
+            String url = System.getenv("url");
+            String username = System.getenv("username");
+            String password = System.getenv("password");
 
             Class.forName("org.postgresql.Driver");
 
