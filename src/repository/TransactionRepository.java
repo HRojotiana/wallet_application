@@ -2,10 +2,7 @@ package repository;
 
 import model.Transaction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 
 public class TransactionRepository {
     private final Connection connection;
@@ -36,6 +33,15 @@ public class TransactionRepository {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void deleteTransactionById(String transactionId) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TRANSACTION_BY_ID_SQL)) {
+            preparedStatement.setString(1, transactionId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
