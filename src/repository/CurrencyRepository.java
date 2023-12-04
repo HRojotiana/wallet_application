@@ -11,6 +11,7 @@ public class CurrencyRepository {
     private Connection connection;
     private static final String SELECT_CURRENCY_BY_ID_SQL = "SELECT * FROM currency WHERE id = ?";
     private static final String INSERT_CURRENCY_SQL = "INSERT INTO currency (id, currency_code, currency_name, currency_symbol, exchangerate) VALUES (?, ?, ?, ?, ?)";
+    private static final String DELETE_CURRENCY_BY_ID_SQL = "DELETE FROM currency WHERE id = ?";
 
     public CurrencyRepository(Connection connection) {
         this.connection = connection;
@@ -56,5 +57,15 @@ public class CurrencyRepository {
         currency.setCurrencySymbol(resultSet.getString("currency_symbol"));
         currency.setExchangeRate(resultSet.getString("exchangerate"));
         return currency;
+    }
+
+    public void deleteCurrencyById(String currencyId) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CURRENCY_BY_ID_SQL)) {
+            preparedStatement.setString(1, currencyId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

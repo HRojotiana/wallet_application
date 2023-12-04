@@ -60,6 +60,8 @@ public class Main {
             } else {
                 System.out.println("No currency found with the ID " + currencyIdToRetrieve);
             }
+
+            //Delete Currency
         } finally {
             try {
                 if (connection != null) {
