@@ -37,8 +37,8 @@ public class Main {
              //InsertCurrency
             CurrencyRepository currencyRepository = new CurrencyRepository(connection);
             Currency newCurrency = new Currency();
-            newCurrency.setId("LMS");
-            newCurrency.setCurrencyCode("LMS");
+            newCurrency.setId("APP");
+            newCurrency.setCurrencyCode("APP");
             newCurrency.setCurrencyName("German");
             newCurrency.setCurrencySymbol("µ");
             newCurrency.setExchangeRate("0.98");
@@ -60,8 +60,12 @@ public class Main {
             } else {
                 System.out.println("No currency found with the ID " + currencyIdToRetrieve);
             }
+            // Delete Currency
+            String currencyIdToDelete = "LMS";
+            currencyRepository.deleteCurrencyById(currencyIdToDelete);
+            System.out.println("Currency with ID " + currencyIdToDelete + " deleted successfully");
 
-            //Delete Currency
+
         } finally {
             try {
                 if (connection != null) {
