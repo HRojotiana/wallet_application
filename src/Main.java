@@ -1,6 +1,8 @@
 import model.Account;
+import model.Currency;
 import repository.AccountRepository;
 import repository.ConnectionConfiguration;
+import repository.CurrencyRepository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,21 +19,47 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Connection connection = ConnectionConfiguration.getInstance().getConnection();
 
-        try {
 
+        try {
             AccountRepository accountRepository = new AccountRepository(connection);
 
-
+            //InsertAccount
             Account newAccount = new Account();
             newAccount.setId("123456");
-            newAccount.setAccountName("Compte de test");
-            newAccount.setAccountType("Type de compte");
+            newAccount.setAccountName("Test Account");
+            newAccount.setAccountType("Account Type");
             newAccount.setBalance(1000.0f);
             newAccount.setCurrencyId("USD");
             newAccount.setTransactionId("789012");
             accountRepository.addAccount(newAccount);
+            System.out.println("Account created successfully.");
 
-            System.out.println("Le compte a été ajouté avec succès.");
+             //InsertCurrency
+            CurrencyRepository currencyRepository = new CurrencyRepository(connection);
+            Currency newCurrency = new Currency();
+            newCurrency.setId("LMS");
+            newCurrency.setCurrencyCode("LMS");
+            newCurrency.setCurrencyName("German");
+            newCurrency.setCurrencySymbol("µ");
+            newCurrency.setExchangeRate("0.98");
+
+            currencyRepository.addCurrency(newCurrency);
+            System.out.println("Currency added successfully");
+
+            //GetCurrency
+            String currencyIdToRetrieve = "USD";
+            Currency retrievedCurrency = currencyRepository.getCurrencyById(currencyIdToRetrieve);
+
+            if (retrievedCurrency != null) {
+                System.out.println("Currency details");
+                System.out.println("ID: " + retrievedCurrency.getId());
+                System.out.println("Code: " + retrievedCurrency.getCurrencyCode());
+                System.out.println("Name: " + retrievedCurrency.getCurrencyName());
+                System.out.println("Symbol: " + retrievedCurrency.getCurrencySymbol());
+                System.out.println("Exchange Rate: " + retrievedCurrency.getExchangeRate());
+            } else {
+                System.out.println("No currency found with the ID " + currencyIdToRetrieve);
+            }
         } finally {
             try {
                 if (connection != null) {
@@ -41,6 +69,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
+
     }
 
 }
