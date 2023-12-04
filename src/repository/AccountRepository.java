@@ -35,5 +35,31 @@ public class AccountRepository {
         }
     }
 
+    public Account getAccountById(String accountId) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ACCOUNT_BY_ID_SQL)) {
+            preparedStatement.setString(1, accountId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return mapResultSetToAccount(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private Account mapResultSetToAccount(ResultSet resultSet) throws SQLException {
+        Account account = new Account();
+        account.setId(resultSet.getString("id"));
+        account.setAccountName(resultSet.getString("accountName"));
+        account.setAccountType(resultSet.getString("accountType"));
+        account.setBalance(resultSet.getFloat("balance"));
+        account.setCurrencyId(resultSet.getString("currencyId"));
+        account.setTransactionId(resultSet.getString("transactionId"));
+        return account;
+    }
 
 }
