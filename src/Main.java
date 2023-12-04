@@ -34,11 +34,12 @@ public class Main {
             accountRepository.addAccount(newAccount);
             System.out.println("Account created successfully.");
 
-             //InsertCurrency
+
+                //InsertCurrency
             CurrencyRepository currencyRepository = new CurrencyRepository(connection);
             Currency newCurrency = new Currency();
-            newCurrency.setId("APP");
-            newCurrency.setCurrencyCode("APP");
+            newCurrency.setId("POO");
+            newCurrency.setCurrencyCode("£");
             newCurrency.setCurrencyName("German");
             newCurrency.setCurrencySymbol("µ");
             newCurrency.setExchangeRate("0.98");

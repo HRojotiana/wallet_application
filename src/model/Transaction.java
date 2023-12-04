@@ -26,7 +26,7 @@ public class Transaction {
         return category;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
