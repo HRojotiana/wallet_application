@@ -35,13 +35,16 @@ public class TransactionRepository {
 
     }
 
-    public void deleteTransactionById(String transactionId) {
+    public boolean deleteTransactionById(String transactionId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TRANSACTION_BY_ID_SQL)) {
             preparedStatement.setString(1, transactionId);
-            preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // Retourne true si au moins une ligne a été supprimée
         } catch (SQLException e) {
             e.printStackTrace();
+            return false; // En cas d'erreur, retourne false
         }
     }
+
 
 }

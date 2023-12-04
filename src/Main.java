@@ -42,7 +42,7 @@ public class Main {
                 //InsertCurrency
             CurrencyRepository currencyRepository = new CurrencyRepository(connection);
             Currency newCurrency = new Currency();
-            newCurrency.setId("POO");
+            newCurrency.setId("QIO");
             newCurrency.setCurrencyCode("£");
             newCurrency.setCurrencyName("German");
             newCurrency.setCurrencySymbol("µ");
@@ -74,7 +74,7 @@ public class Main {
 
             //Insert Transactions
             Transaction newTransaction = new Transaction();
-            newTransaction.setId("109");
+            newTransaction.setId("105");
             newTransaction.setCategory("expense");
             newTransaction.setLabel("None");
             newTransaction.setDate(LocalDate.parse("2023-12-04").atStartOfDay());
@@ -82,6 +82,16 @@ public class Main {
             transactionRepository.addTransaction(newTransaction);
             System.out.println("Transaction added successfully.");
 
+
+           // Delete Transactions
+            String transactionIdToDelete = "103";
+            boolean isTransactionDeleted = transactionRepository.deleteTransactionById(transactionIdToDelete);
+
+            if (isTransactionDeleted) {
+                System.out.println("Transaction with ID " + transactionIdToDelete + " deleted successfully");
+            } else {
+                System.out.println("No transaction found with the ID " + transactionIdToDelete);
+            }
 
         } finally {
             try {
