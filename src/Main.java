@@ -54,7 +54,34 @@ public class Main {
                 System.out.println("No account found with the ID " + accountIdToRetrieve);
             }
 
-                //InsertCurrency
+            // Update Account
+            Account updatedAccount = new Account();
+            updatedAccount.setId("123456");
+            updatedAccount.setAccountName("Updated Account Name");
+            updatedAccount.setAccountType("Updated Account Type");
+            updatedAccount.setBalance(1500.0f);
+            updatedAccount.setCurrencyId("EUR");
+            updatedAccount.setTransactionId("987654");
+
+            accountRepository.updateAccount(updatedAccount);
+            System.out.println("Account updated successfully.");
+
+            // Retrieve and print the updated account details
+            Account retrievedUpdatedAccount = accountRepository.getAccountById("123456");
+            if (retrievedUpdatedAccount != null) {
+                System.out.println("Updated Account details");
+                System.out.println("ID: " + retrievedUpdatedAccount.getId());
+                System.out.println("Account Name: " + retrievedUpdatedAccount.getAccountName());
+                System.out.println("Account Type: " + retrievedUpdatedAccount.getAccountType());
+                System.out.println("Balance: " + retrievedUpdatedAccount.getBalance());
+                System.out.println("Currency ID: " + retrievedUpdatedAccount.getCurrencyId());
+                System.out.println("Transaction ID: " + retrievedUpdatedAccount.getTransactionId());
+            } else {
+                System.out.println("No account found with the ID 123456");
+            }
+
+
+            //InsertCurrency
             CurrencyRepository currencyRepository = new CurrencyRepository(connection);
             Currency newCurrency = new Currency();
             newCurrency.setId("KJI");
@@ -89,7 +116,7 @@ public class Main {
 
             //Insert Transactions
             Transaction newTransaction = new Transaction();
-            newTransaction.setId("133");
+            newTransaction.setId("150");
             newTransaction.setCategory("expense");
             newTransaction.setLabel("None");
             newTransaction.setDate(LocalDate.parse("2023-12-04").atStartOfDay());
@@ -99,7 +126,7 @@ public class Main {
 
 
            // Delete Transactions
-            String transactionIdToDelete = "130";
+            String transactionIdToDelete = "133";
             boolean isTransactionDeleted = transactionRepository.deleteTransactionById(transactionIdToDelete);
 
             if (isTransactionDeleted) {
@@ -109,7 +136,7 @@ public class Main {
             }
 
             //Get Transactions
-            String transactionIdToRetrieve = "109";
+            String transactionIdToRetrieve = "101";
             Transaction retrievedTransaction = transactionRepository.getTransactionById(transactionIdToRetrieve);
 
             if (retrievedTransaction != null) {

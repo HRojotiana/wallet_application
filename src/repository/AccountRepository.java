@@ -60,4 +60,19 @@ public class AccountRepository {
         return account;
     }
 
+    public void updateAccount(Account account) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT_SQL)) {
+            preparedStatement.setString(1, account.getAccountName());
+            preparedStatement.setString(2, account.getAccountType());
+            preparedStatement.setFloat(3, account.getBalance());
+            preparedStatement.setString(4, account.getCurrencyId());
+            preparedStatement.setString(5, account.getTransactionId());
+            preparedStatement.setString(6, account.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
