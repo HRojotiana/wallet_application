@@ -10,6 +10,8 @@ public class Account {
     private String currencyId;
     private String transactionId;
 
+
+
     public Account(String id, String accountName, String accountType, float balance, String currencyId, String transactionId) {
         this.id = id;
         this.accountName = accountName;
@@ -17,7 +19,12 @@ public class Account {
         this.balance = balance;
         this.currencyId = currencyId;
         this.transactionId = transactionId;
+}
+
+    public Account() {
+
     }
+
 
     public String getId() {
         return id;
