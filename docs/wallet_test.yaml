@@ -166,6 +166,35 @@ paths:
        500: 
           $ref: '#/components/responses/500'
 
+  /transactions:
+    get:
+      tags:
+        - "Transactions"
+      summary: Get transaction details
+      parameters:
+        - name: sortBy
+          in: query
+          description: "Sort by a specific property (e.g., transactionTime, transactionAmount)"
+          schema:
+            type: string
+          example: "transactionTime"
+        - name: sortOrder
+          in: query
+          description: "Sort order (asc or desc)"
+          schema:
+            type: string
+            enum: ["asc", "desc"]
+          example: "asc"
+      responses:
+       200: 
+          $ref: '#/components/responses/account200'
+       400: 
+          $ref: '#/components/responses/400'
+       403: 
+          $ref: '#/components/responses/403'
+       500: 
+          $ref: '#/components/responses/500'
+
 components:
   schemas:
     Account:
