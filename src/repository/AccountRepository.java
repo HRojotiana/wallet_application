@@ -41,20 +41,20 @@ public class AccountRepository {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, accountId);
+            preparedStatement.executeUpdate();
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    account = new Account();
-                    account.setId(resultSet.getString("id"));
-                    account.setAccountName(resultSet.getString("accountName"));
-                    account.setAccountType(resultSet.getString("accountType"));
-                    account.setBalance(resultSet.getFloat("balance"));
-                    account.setCurrencyId(resultSet.getString("currencyId"));
-                    account.setTransactionId(resultSet.getString("transactionId"));
-                }
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()){
+                account = new Account(resultSet.getString("id"),
+                        resultSet.getString("account_name"),
+                        resultSet.getString("account_type"),
+                        resultSet.getFloat("balance"),
+                        resultSet.getString("currency_id"),
+                        resultSet.getString("transaction_id"));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }catch(Exception e){
+            System.out.println("Error: "+e.getMessage());
         }
 
         return account;
