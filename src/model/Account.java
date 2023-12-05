@@ -11,7 +11,7 @@ public class Account {
     private String transactionId;
 
 
-
+    //Constructor
     public Account(String id, String accountName, String accountType, float balance, String currencyId, String transactionId) {
         this.id = id;
         this.accountName = accountName;
@@ -21,11 +21,7 @@ public class Account {
         this.transactionId = transactionId;
 }
 
-    public Account() {
-
-    }
-
-
+    //Getter
     public String getId() {
         return id;
     }
@@ -50,6 +46,8 @@ public class Account {
         return transactionId;
     }
 
+
+    //Setter
     public void setId(String id) {
         this.id = id;
     }
@@ -59,7 +57,9 @@ public class Account {
     }
 
     public void setAccountType(String accountType) {
-        this.accountType = accountType;
+        if(accountType.equalsIgnoreCase("general") || accountType.equalsIgnoreCase("cash") || accountType.equalsIgnoreCase("my account") || accountType.equalsIgnoreCase("credit card") || accountType.equalsIgnoreCase("overdraft account") || accountType.equalsIgnoreCase("savings") || accountType.equalsIgnoreCase("bonus") || accountType.equalsIgnoreCase("insurance") || accountType.equalsIgnoreCase("investment") || accountType.equalsIgnoreCase("loan") || accountType.equalsIgnoreCase("mortgage")){
+            this.accountType = accountType;
+        }
     }
 
     public void setBalance(float balance) {
