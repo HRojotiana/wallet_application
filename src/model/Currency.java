@@ -18,6 +18,10 @@ public class Currency {
         this.exchangeRate = exchangeRate;
     }
 
+    public Currency() {
+
+    }
+
     //Getter
     public String getId() {
         return id;

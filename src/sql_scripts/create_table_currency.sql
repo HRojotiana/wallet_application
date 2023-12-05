@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS "currency" (
     currency_code varchar(100) NOT NULL,
     currency_name varchar(100),
     currency_symbol varchar(10),
-    exchangeRate varchar(100)
+    exchangerate varchar(100)
 );
 
 INSERT INTO "currency" (id, currency_code, currency_name, currency_symbol, exchangeRate)
