@@ -13,9 +13,6 @@ public class TransactionRepository {
     private static final String INSERT_TRANSACTION_SQL =
             "INSERT INTO transaction (id, category, label, date, payment_id) VALUES (?, ?, ?, ?, ?)";
 
-    private static final String SELECT_TRANSACTION_BY_ID_SQL =
-            "SELECT * FROM transaction WHERE id = ?";
-
     private static final String DELETE_TRANSACTION_BY_ID_SQL =
             "DELETE FROM transaction WHERE id = ?";
 

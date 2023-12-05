@@ -10,7 +10,6 @@ import java.sql.SQLException;
 public class CurrencyRepository {
     private static final String UPDATE_CURRENCY_SQL = "UPDATE currency SET currency_code = ?, currency_name = ?, currency_symbol = ?, exchangerate = ? WHERE id = ?";
     private Connection connection;
-    private static final String SELECT_CURRENCY_BY_ID_SQL = "SELECT * FROM currency WHERE id = ?";
     private static final String INSERT_CURRENCY_SQL = "INSERT INTO currency (id, currency_code, currency_name, currency_symbol, exchangerate) VALUES (?, ?, ?, ?, ?)";
     private static final String DELETE_CURRENCY_BY_ID_SQL = "DELETE FROM currency WHERE id = ?";
 

@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 
 public class AccountRepository {
     public static final String INSERT_ACCOUNT_SQL = "INSERT INTO account (id, account_name, account_type, balance, currency_id, transaction_id) VALUES (?, ?, ?, ?, ?, ?)";
-    public static final String SELECT_ALL_ACCOUNTS_SQL = "SELECT * FROM account";
-    private static final String SELECT_ACCOUNT_BY_ID_SQL = "SELECT * FROM account WHERE id = ?";
     private static final String UPDATE_ACCOUNT_SQL = "UPDATE account SET account_name = ?, account_type = ?, balance = ?, currency_id = ?, transaction_id = ? WHERE id = ?";
 
     final Connection connection;
