@@ -28,14 +28,7 @@ public class Main {
             AccountRepository accountRepository = new AccountRepository(connection);
 
             //InsertAccount
-            Account newAccount = new Account();
-            newAccount.setId("123456");
-            newAccount.setAccountName("Test Account");
-            newAccount.setAccountType("Account Type");
-            newAccount.setBalance(1000.0f);
-            newAccount.setCurrencyId("USD");
-            newAccount.setTransactionId("789012");
-            accountRepository.addAccount(newAccount);
+            Account newAccount = new Account("123456", "Test Account", "AccountType", 1233.0f,"USD", "789012" );
             System.out.println("Account created successfully.");
 
             //GetAccount
@@ -55,13 +48,8 @@ public class Main {
             }
 
             // Update Account
-            Account updatedAccount = new Account();
-            updatedAccount.setId("123456");
-            updatedAccount.setAccountName("Updated Account Name");
-            updatedAccount.setAccountType("Updated Account Type");
-            updatedAccount.setBalance(1500.0f);
-            updatedAccount.setCurrencyId("EUR");
-            updatedAccount.setTransactionId("987654");
+            Account updatedAccount = new Account("123456", "Updated Account Name", "Updated Account Type", 1500.0f, "EUR", "987654");
+
 
             accountRepository.updateAccount(updatedAccount);
             System.out.println("Account updated successfully.");
@@ -84,7 +72,7 @@ public class Main {
             //InsertCurrency
             CurrencyRepository currencyRepository = new CurrencyRepository(connection);
             Currency newCurrency = new Currency();
-            newCurrency.setId("LMO");
+            newCurrency.setId("KIO");
             newCurrency.setCurrencyCode("£");
             newCurrency.setCurrencyName("German");
             newCurrency.setCurrencySymbol("µ");
@@ -116,7 +104,7 @@ public class Main {
 
             // Update Currency
             Currency updatedCurrency = new Currency();
-            updatedCurrency.setId("MIU");
+            updatedCurrency.setId("LOO");
             updatedCurrency.setCurrencyCode("££");
             updatedCurrency.setCurrencyName("Updated Currency Name");
             updatedCurrency.setCurrencySymbol("µµ");
@@ -141,7 +129,7 @@ public class Main {
 
             //Insert Transactions
             Transaction newTransaction = new Transaction();
-            newTransaction.setId("160");
+            newTransaction.setId("200");
             newTransaction.setCategory("expense");
             newTransaction.setLabel("None");
             newTransaction.setDate(LocalDate.parse("2023-12-04").atStartOfDay());

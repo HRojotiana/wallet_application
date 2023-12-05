@@ -83,7 +83,7 @@ paths:
         500: 
           $ref: '#/components/responses/500'
   /account/{accountId}/currency/{currencyId}: 
-    put: 
+    put:
       tags:
         - Account 
       summary: update an account with its currency 
@@ -118,6 +118,83 @@ paths:
           $ref: '#/components/responses/403'
         500: 
           $ref: '#/components/responses/500'
+
+  /transactions/{transactionID}:
+    get:
+      tags:
+        - "Transactions"
+      summary: Get transaction by ID
+      parameters:
+        - name: transactionID
+          in: path
+          required: true
+          description: "ID of the transaction to retrieve"
+          schema:
+            type: string
+      responses:
+       200: 
+          $ref: '#/components/responses/account200'
+       400: 
+          $ref: '#/components/responses/400'
+       403: 
+          $ref: '#/components/responses/403'
+       500: 
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - "Transactions"
+      summary: Update transactions details by ID
+      parameters:
+        - name: transactionID
+          in: path
+          required: true
+          description: "ID of the transaction to update"
+          schema:
+            type: string
+      requestBody:
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Transaction"
+      responses:
+       200: 
+          $ref: '#/components/responses/account200'
+       400: 
+          $ref: '#/components/responses/400'
+       403: 
+          $ref: '#/components/responses/403'
+       500: 
+          $ref: '#/components/responses/500'
+
+  /transactions:
+    get:
+      tags:
+        - "Transactions"
+      summary: Get transaction details
+      parameters:
+        - name: sortBy
+          in: query
+          description: "Sort by a specific property (e.g., transactionTime, transactionAmount)"
+          schema:
+            type: string
+          example: "transactionTime"
+        - name: sortOrder
+          in: query
+          description: "Sort order (asc or desc)"
+          schema:
+            type: string
+            enum: ["asc", "desc"]
+          example: "asc"
+      responses:
+       200: 
+          $ref: '#/components/responses/account200'
+       400: 
+          $ref: '#/components/responses/400'
+       403: 
+          $ref: '#/components/responses/403'
+       500: 
+          $ref: '#/components/responses/500'
+
 components:
   schemas:
     Account:

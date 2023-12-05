@@ -21,6 +21,7 @@ public class Account {
         this.transactionId = transactionId;
 }
 
+
     //Getter
     public String getId() {
         return id;

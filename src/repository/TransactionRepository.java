@@ -75,6 +75,7 @@ public class TransactionRepository {
             preparedStatement.setString(1, transaction.getCategory());
             preparedStatement.setString(2, transaction.getLabel());
             preparedStatement.setTimestamp(3, Timestamp.valueOf(transaction.getDate().atStartOfDay()));
+            
             preparedStatement.setString(4, transaction.getPaymentId());
             preparedStatement.setString(5, transaction.getId());
 
